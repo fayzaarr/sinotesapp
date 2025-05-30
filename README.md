@@ -25,4 +25,4 @@ Frontend & UI/UX Enthusiast 🌸
 
 ---
 
-## Kalau kamu butuh disesuaikan untuk portofolio (misalnya mau ditambah bagian "tujuan proyek", atau "fitur unggulan secara UX") tinggal bilang yaa!
+Kalau kamu butuh disesuaikan untuk portofolio (misalnya mau ditambah bagian "tujuan proyek", atau "fitur unggulan secara UX") tinggal bilang yaa!
