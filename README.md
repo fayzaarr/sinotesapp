@@ -2,7 +2,7 @@
 
 Smart Note App adalah aplikasi pencatatan sederhana namun pintar yang dibangun dengan **Vue 3**. Aplikasi ini memungkinkan pengguna untuk menulis, mengedit, menghapus, dan menyimpan catatan berdasarkan format dan tag tertentu. Terdapat fitur pencarian dan filter berdasarkan tag, serta tema gelap/terang (dark mode).
 
-## Link
+## 🔗 Link
 sinotesapp.vercel.app
 
 ## ✨ Fitur
