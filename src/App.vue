@@ -15,8 +15,12 @@
           <input
             v-model="searchQuery"
             placeholder="Search notes..."
-            class="pl-10 pr-4 py-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-700
-                  placeholder-gray-400 dark:placeholder-gray-500 dark:bg-gray-800 dark:text-white"
+            :class="[
+              'pl-10 pr-4 py-2 w-full border rounded-md focus:outline-none transition-colors duration-300',
+              isDark
+                ? 'bg-gray-800 text-white placeholder-gray-500 focus:ring-gray-500'
+                : 'bg-white text-black placeholder-gray-400 focus:ring-gray-700'
+            ]"
           />
         </div>
 
@@ -35,10 +39,14 @@
             v-for="tag in ['Study', 'Personal', 'Work', 'All']"
             :key="tag"
             :class="[
-              'border rounded-full px-4 py-1 transition',
+              'border rounded-full px-4 py-1 transition-colors',
               selectedTag === tag
-                ? 'bg-gray-950 text-white'
-                : 'hover:bg-gray-600 dark:hover:bg-gray-700'
+                ? (isDark
+                    ? 'bg-white text-black'
+                    : 'bg-black text-white')
+                : (isDark
+                    ? 'bg-gray-800 text-white hover:bg-gray-700'
+                    : 'bg-white text-black hover:bg-gray-200')
             ]"
             @click="selectTag(tag)"
           >
