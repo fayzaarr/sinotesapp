@@ -115,20 +115,33 @@
       class="fixed inset-0 bg-black/30 backdrop-blur-md bg-opacity-50 flex items-center justify-center z-50"
       @click.self="closeModal"
     >
-      <div class="border border-white bg-white dark:bg-gray-900 p-6 rounded-md w-full max-w-md">
+      <div
+        :class="[
+          'p-6 rounded-md w-full max-w-md transition-colors duration-300',
+          isDark
+            ? 'bg-gray-900 border border-gray-600 text-white'
+            : 'bg-white border border-gray-300 text-black'
+        ]"
+      >
         <button
-          class="mb-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+          class="mb-4 transition-colors duration-300"
+          :class="isDark
+            ? 'text-gray-300 hover:text-white'
+            : 'text-gray-600 hover:text-gray-900'"
           @click="closeModal"
         >
           ✖ Close
         </button>
+
         <NoteForm
           v-model="newNote"
           :isEditing="editIndex !== null"
+          :isDark="isDark"
           @submit="submitNote"
         />
       </div>
     </div>
+
   </div>
 </template>
 

@@ -1,17 +1,20 @@
 <template>
   <form
     @submit.prevent="handleSubmit"
-    class="mb-6 space-y-3 bg-white dark:bg-gray-800 text-black dark:text-white p-6 rounded shadow-md transition-colors duration-300"
+    class="mb-6 space-y-3 p-6 rounded shadow-md transition-colors duration-300"
+    :class="isDark ? 'bg-gray-800 text-white' : 'bg-white text-black'"
   >
     <!-- Input Judul -->
     <input
       v-model="localNote.title"
       type="text"
       placeholder="Judul"
-      class="w-full p-2 border rounded bg-white dark:bg-gray-700 
-             border-gray-300 dark:border-gray-600 
-             text-black dark:text-white 
-             placeholder-gray-400 dark:placeholder-gray-500"
+      :class="[
+        'w-full p-2 border rounded placeholder-gray-400 transition-colors duration-300',
+        isDark
+          ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-500'
+          : 'bg-white border-gray-300 text-black placeholder-gray-400'
+      ]"
     />
 
     <!-- Tombol Format -->
@@ -21,11 +24,11 @@
         :key="option"
         type="button"
         @click="localNote.format = option"
-        :class="[ 
-          'px-3 py-1 rounded border transition',
+        :class="[
+          'px-3 py-1 rounded border transition-colors duration-200',
           localNote.format === option
-            ? 'bg-gray-700 text-white'
-            : 'bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600'
+            ? (isDark ? 'bg-gray-700 text-white border-gray-500' : 'bg-gray-300 text-black border-gray-400')
+            : (isDark ? 'bg-gray-600 text-white hover:bg-gray-500 border-gray-500' : 'bg-gray-100 text-black hover:bg-gray-200 border-gray-300')
         ]"
       >
         {{ option }}
@@ -36,11 +39,13 @@
     <textarea
       v-model="localNote.content"
       placeholder="Isi catatan"
-      class="w-full p-2 resize-y border rounded bg-white dark:bg-gray-700 
-             border-gray-300 dark:border-gray-600 
-             text-black dark:text-white 
-             placeholder-gray-400 dark:placeholder-gray-500"
       rows="5"
+      :class="[
+        'w-full p-2 resize-y border rounded transition-colors duration-300',
+        isDark
+          ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-500'
+          : 'bg-white border-gray-300 text-black placeholder-gray-400'
+      ]"
     />
 
     <!-- Input Tag -->
@@ -48,17 +53,24 @@
       v-model="localNote.tag"
       type="text"
       placeholder="Tag (opsional)"
-      class="w-full p-2 border rounded dark:bg-gray-800 dark:border-gray-600 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+      :class="[
+        'w-full p-2 border rounded transition-colors duration-300',
+        isDark
+          ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-500'
+          : 'bg-white border-gray-300 text-black placeholder-gray-400'
+      ]"
     />
 
     <!-- Tombol Submit -->
     <button
       type="submit"
       :disabled="!localNote.title || !localNote.content"
-      class="w-full px-4 py-2 rounded font-semibold transition 
-             bg-gray-500 text-white hover:bg-gray-900 
-             disabled:bg-gray-200 disabled:text-gray-500 
-             dark:disabled:bg-gray-700 dark:disabled:text-gray-400"
+      :class="[
+        'w-full px-4 py-2 rounded font-semibold transition-colors duration-300',
+        (!localNote.title || !localNote.content)
+          ? (isDark ? 'bg-gray-700 text-gray-400' : 'bg-gray-200 text-gray-500')
+          : (isDark ? 'bg-gray-600 text-white hover:bg-gray-500' : 'bg-gray-500 text-white hover:bg-gray-700')
+      ]"
     >
       {{ isEditing ? 'Update' : 'Tambah' }} Catatan
     </button>
@@ -83,6 +95,7 @@ interface Note {
 const props = defineProps<{
   modelValue: Note
   isEditing: boolean
+  isDark: boolean
 }>()
 
 const emit = defineEmits(['submit', 'update:modelValue'])
